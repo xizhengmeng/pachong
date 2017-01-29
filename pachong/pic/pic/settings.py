@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'pic.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'pic (+http://www.yourdomain.com)'
 ITEM_PIPELINES = {'scrapy.contrib.pipeline.images.ImagesPipeline': 1}
-IMAGES_STORE = '/Users/shenghuihan/Desktop/picture'
+IMAGES_STORE = '/Users/han/Desktop/picture'
 
 USER_AGENT = 'MMozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'
 COOKIES_ENABLED = True

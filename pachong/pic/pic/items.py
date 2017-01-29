@@ -5,7 +5,7 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-from scrapy import Item,Field
+from scrapy import Item, Field
 
 
 class PicItem(Item):
@@ -14,3 +14,4 @@ class PicItem(Item):
     # pass
    image_urls = Field()
    images = Field()
+   #这里必须用image_urls不能用image_url
