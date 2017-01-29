@@ -11,7 +11,7 @@ class picSpider(CrawlSpider):
 
     s_urls = []
 
-    for i in range(2400):
+    for i in range(1000):
         number = 'page-%i' % i
         string = 'http://jandan.net/ooxx/%s#comments/' % number
         s_urls.append(string)
@@ -19,21 +19,36 @@ class picSpider(CrawlSpider):
     start_urls = s_urls
 
     #这里的关键是把urls存入到item的urls这个字段
+    #增加一些图片的选择逻辑
     def parse(self, response):
         selector = Selector(response)
-        item = PicItem()
-        urls = selector.xpath('.//img/@src').extract()
-        # item['image_urls'] = urls
         
+        # urls = selector.xpath('.//img/@src').extract()
+        sels = selector.xpath('//li')
+        # item['image_urls'] = urls
+        item = PicItem()
         images = []
 
-        for url in urls:
-            # print 'http:' + url
-            urlString = url.encode("utf-8")
-            url = 'http:' + urlString
-            images.append(url)
-            # print item
-            # yield item
+        for sel in sels:
+            url = sel.xpath('./div[1]/div/div[2]/p/img/@src').extract()
+            vote = sel.xpath('./div[1]/div/div[2]/div/span[2]/text()').extract()
+            if len(vote) > 0:
+               print len(vote)   
+               voteN = int(vote[0])
+               print voteN
+               if voteN > 300:
+                  print url
+                  urlString = url[0].encode("utf-8")
+                  urlS = 'http:' + urlString
+                  images.append(urlS)
+
+            # item = PicItem()
+
+        # for url in urls:
+        #     print url
+            # urlString = url.encode("utf-8")
+            # url = 'http:' + urlString
+            # images.append(url)
         
         item['image_urls'] = images 
         yield item
